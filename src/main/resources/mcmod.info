@@ -1,0 +1,16 @@
+[
+    {
+      "modid": "${modId}",
+      "name": "${modName}",
+      "description": "A library mod adding a potion and mob config picker, allowing for easy picker addition.",
+      "version": "${modVersion}",
+      "mcversion": "${minecraftVersion}",
+      "url": "",
+      "updateUrl": "",
+      "authorList": ["trollogyadherent"],
+      "credits": "FalsePattern, bspkrs",
+      "logoFile": "assets/${modId}/logo.png",
+      "screenshots": [],
+      "dependencies": []
+    }
+]
