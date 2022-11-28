@@ -17,8 +17,6 @@ public class PotionListEntry extends ListEntry {
 
     public PotionListEntry(PotionSelectionGui potionSelectionGui, Potion potion) {
         super(potionSelectionGui);
-
-        this.entryPoint = potionSelectionGui.entryPoint;
         this.potion = potion;
 
         /* Splitting the potion color int into RGB floats */
@@ -63,6 +61,6 @@ public class PotionListEntry extends ListEntry {
 
     @Override
     public String getDisplayString() {
-        return selectionGui.entryPoint.getDisplayString(potion);
+        return entryPoint.getDisplayString(potion);
     }
 }

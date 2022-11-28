@@ -2,6 +2,7 @@ package trollogyadherent.configmaxxing;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import trollogyadherent.configmaxxing.configpickers.biome.BiomeEntryPoint;
 import trollogyadherent.configmaxxing.configpickers.mob.MobBlacklistEntryPoint;
 import trollogyadherent.configmaxxing.configpickers.mob.MobEntryPoint;
 import trollogyadherent.configmaxxing.configpickers.potion.PotionEntryPoint;
@@ -35,6 +36,8 @@ public class Config {
         public static final String[] mobArray = {};
         public static final String[] mobArrayMaxLen = {};
         public static final String[] mobArrayFixedSize = {"EntityHorse", "Ozelot", "EnderDragon", "Enderman", "Zombie"};
+
+        public static final String[] biomeArray = {};
     }
 
     public static class Categories {
@@ -52,10 +55,10 @@ public class Config {
     public static String[] mobArray = Defaults.mobArray;
     public static String[] mobArrayMaxLen = Defaults.mobArrayMaxLen;
     public static String[] mobArrayFixedSize = Defaults.mobArrayFixedSize;
-
     public static String singlePotionButSlimBecauseGTMEGA = Defaults.singlePotion;
-
     public static String[] mobBlackListArray = Defaults.mobBlackListArray;
+
+    public static String[] biomeArray = Defaults.biomeArray;
 
     public static boolean debug;
 
@@ -151,6 +154,12 @@ public class Config {
         }
         mobArrayFixedSize = mobArrayFixedSizeProperty.getStringList();
 
+
+        Property biomeArrayProperty = config.get(Categories.examples, "biomeArray", Defaults.biomeArray, "Example list of biomes.");
+        if (!Util.isServer()) {
+            biomeArrayProperty.setConfigEntryClass(BiomeEntryPoint.class);
+        }
+        biomeArray = biomeArrayProperty.getStringList();
 
         Property singlePotionSlimProperty = config.get(Categories.examples, "slimExample for skill issue", Defaults.singlePotion, "This is to demonstrate slimmer selection list entries. For the MEGA modpack people. Houston, if you want smaller entries, just make them yourself");
         if (!Util.isServer()) {

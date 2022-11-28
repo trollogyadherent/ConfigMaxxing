@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class ClientUtil {
-    public static void drawModalRectWithCustomSizedTexture(Minecraft mc, ResourceLocation rl, int x, int y, int drawWidth, int drawHeight, int textureWidthPercentage, int textureHeightPercentage)
+    public static void drawModalRectWithCustomSizedTexture(Minecraft mc, ResourceLocation rl, int x, int y, int drawWidth, int drawHeight, double textureWidthPercentage, double textureHeightPercentage)
     {
         mc.getTextureManager().bindTexture(rl);
 
