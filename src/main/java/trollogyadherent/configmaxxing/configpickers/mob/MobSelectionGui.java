@@ -5,6 +5,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityList;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import trollogyadherent.configmaxxing.Config;
 import trollogyadherent.configmaxxing.configpickers.AvailableEntriesListGui;
 import trollogyadherent.configmaxxing.configpickers.CommonSelectionGui;
 import trollogyadherent.configmaxxing.configpickers.EntryPoint;
@@ -73,8 +74,17 @@ public class MobSelectionGui extends CommonSelectionGui {
     @Override
     public void populateEntries() {
         for (Object e : EntityList.stringToClassMapping.keySet()) {
-            MobListEntry entry = new MobListEntry(this, (String) e);
-            this.availableEntries.add(entry);
+            boolean foundInBlackList = false;
+            for (String s : Config.mobBlackListArray) {
+                if (s.equals(e)) {
+                    foundInBlackList = true;
+                    break;
+                }
+            }
+            if (!foundInBlackList) {
+                MobListEntry entry = new MobListEntry(this, (String) e);
+                this.availableEntries.add(entry);
+            }
         }
     }
 

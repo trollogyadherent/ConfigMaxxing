@@ -2,9 +2,9 @@ package trollogyadherent.configmaxxing;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import trollogyadherent.configmaxxing.configpickers.mob.MobBlacklistEntryPoint;
 import trollogyadherent.configmaxxing.configpickers.mob.MobEntryPoint;
 import trollogyadherent.configmaxxing.configpickers.potion.PotionEntryPoint;
-import trollogyadherent.configmaxxing.configpickers.potionslim.PotionSlimEntryPoint;
 import trollogyadherent.configmaxxing.util.Util;
 
 import java.io.File;
@@ -15,6 +15,14 @@ public class Config {
     
     private static class Defaults {
         public static final boolean debug = false;
+
+        public static final String[] mobBlackListArray = {
+                "MinecartChest", "EyeOfEnderSignal", "ItemFrame", "MinecartCommandBlock", "Item", "Fireball",
+                "MinecartTNT", "ThrownPotion", "LeashKnot", "Arrow", "MinecartSpawner", "EnderCrystal",
+                "Snowball", "MinecartHopper", "XPOrb", "ThrownExpBottle", "FireworksRocketEntity", "FallingSand",
+                "PrimedTnt", "ThrownEnderpearl", "Monster", "SmallFireball", "MinecartRideable", "Mob", "Painting",
+                "MinecartFurnace", "WitherSkull", "Boat"
+        };
 
         public static final String singlePotion = "potion.moveSpeed";
         public static final String[] potionArray = {};
@@ -32,6 +40,7 @@ public class Config {
     public static class Categories {
         public static final String general = "general";
         public static final String debug = "debug";
+        public static final String examples = "examples";
     }
 
     public static String singlePotion = Defaults.singlePotion;
@@ -45,6 +54,8 @@ public class Config {
     public static String[] mobArrayFixedSize = Defaults.mobArrayFixedSize;
 
     public static String singlePotionButSlimBecauseGTMEGA = Defaults.singlePotion;
+
+    public static String[] mobBlackListArray = Defaults.mobBlackListArray;
 
     public static boolean debug;
 
@@ -84,57 +95,64 @@ public class Config {
         debug = debugProperty.getBoolean();
 
         /* general */
-        Property singlePotionProperty = config.get(Categories.general, "singlePotion", Defaults.singlePotion, "Example single potion.");
+        Property mobBlackListArrayProperty = config.get(Categories.general, "mobBlackListArray", Defaults.potionArray, "Example list of potions.");
+        if (!Util.isServer()) {
+            mobBlackListArrayProperty.setConfigEntryClass(MobBlacklistEntryPoint.class);
+        }
+        mobBlackListArray = mobBlackListArrayProperty.getStringList();
+
+        /* examples */
+        Property singlePotionProperty = config.get(Categories.examples, "singlePotion", Defaults.singlePotion, "Example single potion.");
         if (!Util.isServer()) {
             singlePotionProperty.setConfigEntryClass(PotionEntryPoint.class);
         }
         singlePotion = singlePotionProperty.getString();
 
-        Property potionArrayProperty = config.get(Categories.general, "potionArray", Defaults.potionArray, "Example list of potions.", false, 5, null);
+        Property potionArrayProperty = config.get(Categories.examples, "potionArray", Defaults.potionArray, "Example list of potions.");
         if (!Util.isServer()) {
             potionArrayProperty.setConfigEntryClass(PotionEntryPoint.class);
         }
         potionArray = potionArrayProperty.getStringList();
 
-        Property potionArrayMaxLenProperty = config.get(Categories.general, "potionArrayMaxLen", Defaults.potionArrayMaxLen, "Example list of potions with a maximum size.", false, 5, null);
+        Property potionArrayMaxLenProperty = config.get(Categories.examples, "potionArrayMaxLen", Defaults.potionArrayMaxLen, "Example list of potions with a maximum size.", false, 5, null);
         if (!Util.isServer()) {
             potionArrayMaxLenProperty.setConfigEntryClass(PotionEntryPoint.class);
         }
         potionArrayMaxLen = potionArrayMaxLenProperty.getStringList();
 
-        Property potionArrayFixedSizeProperty = config.get(Categories.general, "potionArrayFixedSize", Defaults.potionArrayFixedSize, "Example list of potions with a fixed size.", true, 5, null);
+        Property potionArrayFixedSizeProperty = config.get(Categories.examples, "potionArrayFixedSize", Defaults.potionArrayFixedSize, "Example list of potions with a fixed size.", true, 5, null);
         if (!Util.isServer()) {
             potionArrayFixedSizeProperty.setConfigEntryClass(PotionEntryPoint.class);
         }
         potionArrayFixedSize = potionArrayFixedSizeProperty.getStringList();
 
 
-        Property singleMobProperty = config.get(Categories.general, "singleMob", Defaults.singleMob, "Example single mob.");
+        Property singleMobProperty = config.get(Categories.examples, "singleMob", Defaults.singleMob, "Example single mob.");
         if (!Util.isServer()) {
             singleMobProperty.setConfigEntryClass(MobEntryPoint.class);
         }
         singleMob = singleMobProperty.getString();
 
-        Property mobArrayProperty = config.get(Categories.general, "mobArray", Defaults.mobArray, "Example list of mobs.", false, 5, null);
+        Property mobArrayProperty = config.get(Categories.examples, "mobArray", Defaults.mobArray, "Example list of mobs.");
         if (!Util.isServer()) {
             mobArrayProperty.setConfigEntryClass(MobEntryPoint.class);
         }
         mobArray = mobArrayProperty.getStringList();
 
-        Property mobArrayMaxLenProperty = config.get(Categories.general, "mobArrayMaxLen", Defaults.mobArrayMaxLen, "Example list of mobs with a maximum size.", false, 5, null);
+        Property mobArrayMaxLenProperty = config.get(Categories.examples, "mobArrayMaxLen", Defaults.mobArrayMaxLen, "Example list of mobs with a maximum size.", false, 5, null);
         if (!Util.isServer()) {
             mobArrayMaxLenProperty.setConfigEntryClass(MobEntryPoint.class);
         }
         mobArrayMaxLen = mobArrayMaxLenProperty.getStringList();
 
-        Property mobArrayFixedSizeProperty = config.get(Categories.general, "mobArrayFixedSize", Defaults.mobArrayFixedSize, "Example list of mobs with a fixed size.", true, 5, null);
+        Property mobArrayFixedSizeProperty = config.get(Categories.examples, "mobArrayFixedSize", Defaults.mobArrayFixedSize, "Example list of mobs with a fixed size.", true, 5, null);
         if (!Util.isServer()) {
             mobArrayFixedSizeProperty.setConfigEntryClass(MobEntryPoint.class);
         }
         mobArrayFixedSize = mobArrayFixedSizeProperty.getStringList();
 
 
-        Property singlePotionSlimProperty = config.get(Categories.general, "slimExample for skill issue", Defaults.singlePotion, "This is to demonstrate slimmer selection list entries. For the MEGA modpack people. Houston, if you want smaller entries, just make them yourself");
+        Property singlePotionSlimProperty = config.get(Categories.examples, "slimExample for skill issue", Defaults.singlePotion, "This is to demonstrate slimmer selection list entries. For the MEGA modpack people. Houston, if you want smaller entries, just make them yourself");
         if (!Util.isServer()) {
             /* If you don't like dependencies, just do this. lol. */
             /* What's the worst thing that could happen anyway. The list gui will just be a plain forge one. */
