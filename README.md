@@ -39,6 +39,8 @@ You need to have a `String` or `String Array` config entry. In this example it w
 ```java
 public static String[] potionArray = {};
 ```
+Available pickers: `Potion`, `Mob`, `Biome`, `PotionSlim`, `Block (WIP)`
+<br>
 To make it use the potion picker, one needs to use Forge's inbuilt `setConfigEntryClass` on the config property. It also needs to be done on the client solely (also a limitation of Forge).
 ```java
 Property potionArrayProperty = config.get(Categories.examples, "potionArray", Defaults.potionArray, "Example list of potions.");
@@ -68,5 +70,7 @@ The second class is the main picker GUI class containing the list and any other 
 The third class represents an single entry in the list. The entry render code is situated there. It extends `ListEntry`.
 <br>
 There is a the `potionslim` package demonstrating an extension of the potion picker that renders potions in the list two times smaller and only with the main potion names.
+<br>
+There is some work being done on custom properties holding multiple "vanilla" properties at once. Example use case: A property comprised of a Potion `string`, a Potion Duration `int` and Potion Strength `int`. To look how to create such a property, look at the bottom of `synchronizeConfigurationCommon()` in the `Config` class. If you choose to use this feature, you are on your own.
 
 ![license](lgplsneed_small.png)
