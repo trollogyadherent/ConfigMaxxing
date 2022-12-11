@@ -29,7 +29,7 @@ public class CommonProxy {
 
     // postInit "Handle interaction with other mods, complete your setup based on this."
     public void postInit(FMLPostInitializationEvent event) {
-        BlockUtil.test();
+        
     }
 
     public void serverAboutToStart(FMLServerAboutToStartEvent event) {
