@@ -1,31 +1,25 @@
-package trollogyadherent.configmaxxing.configpickers.potion;
+package trollogyadherent.configmaxxing.configpickers.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-import trollogyadherent.configmaxxing.configpickers.*;
+import trollogyadherent.configmaxxing.configpickers.AvailableEntriesListGui;
+import trollogyadherent.configmaxxing.configpickers.CommonSelectionGui;
+import trollogyadherent.configmaxxing.configpickers.EntryPoint;
+import trollogyadherent.configmaxxing.configpickers.GuiEditArrayCommon;
 import trollogyadherent.configmaxxing.util.ClientUtil;
 
-/* The gui presenting the list of potions to choose from */
-public class PotionSelectionGui extends CommonSelectionGui {
-    public ResourceLocation potionResourceLocation = new ResourceLocation("textures/items/potion_bottle_empty.png");
-    ResourceLocation potionSplashResourceLocation = new ResourceLocation("textures/items/potion_bottle_splash.png");
-    public ResourceLocation potionOverlayResourceLocation = new ResourceLocation("textures/items/potion_overlay.png");
-
-    public PotionSelectionGui(int index, GuiEditArrayCommon.ReturnInfo returnInfo, EntryPoint entryPoint) {
+public class BlockSelectionGui extends CommonSelectionGui {
+    public BlockSelectionGui(int index, GuiEditArrayCommon.ReturnInfo returnInfo, EntryPoint entryPoint) {
         super(index, returnInfo, entryPoint);
-        this.title = I18n.format("eyesintheshadows.potion_selection_title");
+        this.title = I18n.format("eyesintheshadows.block_selection_title");
     }
 
     @Override
     public void populateEntries() {
-        for (Potion p : Potion.potionTypes) {
-            if (p != null) {
-                PotionListEntry entry = new PotionListEntry(this, p);
-                this.availableEntries.add(entry);
-            }
+        for (Object o : Block.blockRegistry.getKeys()) {
+            BlockListEntry blockListEntry = new BlockListEntry(this, (Block) Block.blockRegistry.getObject(o));
+            this.availableEntries.add(blockListEntry);
         }
     }
 
@@ -67,10 +61,10 @@ public class PotionSelectionGui extends CommonSelectionGui {
         /* Drawing the title of this gui */
         this.drawCenteredString(this.fontRendererObj, title, this.width / 2, 16, 16777215);
 
-        /* additional list widget footer, otherwise is buggy for some reason */
+        /* additonal list widget footer, otherwise is buggy for some reason */
         drawFooter();
 
-        /* Drawing the rest, essentially the search box and the done button */
+        /* Drawing the rest, esentially the search box and the done button */
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 

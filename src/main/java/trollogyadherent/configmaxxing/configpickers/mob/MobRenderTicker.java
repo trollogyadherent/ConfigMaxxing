@@ -32,7 +32,7 @@ public class MobRenderTicker
     private static boolean isRegistered = false;
     private static World world;
     @SuppressWarnings("unused")
-    private GuiScreen savedScreen;
+    private static GuiScreen savedScreen;
     private static List<ItemStack> playerItems = new ArrayList<>();
     private static Random random = new Random();
 
@@ -90,7 +90,7 @@ public class MobRenderTicker
         }
     }
 
-    private void init() {
+    private static void init() {
         try {
             boolean createNewWorld = world == null;
 
@@ -123,7 +123,11 @@ public class MobRenderTicker
 
     public static void setMob(String mobString) {
         if (world == null) {
-            ConfigMaxxing.debug("(setMob) world null");
+            ConfigMaxxing.debug("(setMob) world null, initializing");
+            init();
+        }
+        if (world == null) {
+            ConfigMaxxing.warn("(setMob) world null after init, not setting entity");
             mob = null;
             return;
         }

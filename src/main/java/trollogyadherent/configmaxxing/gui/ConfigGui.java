@@ -16,10 +16,11 @@ public class ConfigGui extends GuiConfig {
     private static IConfigElement ceGeneral = new ConfigElement(Config.config.getCategory(Config.Categories.general));
     private static IConfigElement ceDebug = new ConfigElement(Config.config.getCategory(Config.Categories.debug));
     private static IConfigElement ceExamples = new ConfigElement(Config.config.getCategory(Config.Categories.examples));
+    private static IConfigElement ceTest = new ConfigElement(Config.config.getCategory(Config.Categories.test));
 
     public ConfigGui(GuiScreen parent) {
         //this.parentScreen = parent;
-        super(parent, ImmutableList.of(ceGeneral, ceDebug, ceExamples), Tags.MODID, Tags.MODID, false, false, I18n.format(Tags.MODID + ".configgui.title"), ConfigMaxxing.confFile.getAbsolutePath());
+        super(parent, ImmutableList.of(ceGeneral, ceDebug, ceExamples, ceTest), Tags.MODID, Tags.MODID, false, false, I18n.format(Tags.MODID + ".configgui.title"), ConfigMaxxing.confFile.getAbsolutePath());
         ConfigMaxxing.debug("Instantiating config gui");
     }
 

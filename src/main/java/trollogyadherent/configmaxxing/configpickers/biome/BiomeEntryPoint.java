@@ -35,7 +35,7 @@ public class BiomeEntryPoint extends EntryPoint {
     public String getDisplayString(Object val) {
         BiomeGenBase biomeGenBase = (BiomeGenBase) val;
         if (biomeGenBase == null) {
-            return "";
+            return "None";
         }
         return biomeGenBase.biomeName;
     }

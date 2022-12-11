@@ -58,6 +58,7 @@ public abstract class EntryPoint extends GuiConfigEntries.ArrayEntry {
                 mc.displayGuiScreen((GuiScreen) commonSelectionGui);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 ConfigMaxxing.error("Failed to instantiate picker: " + selectionGuiClass.getCanonicalName());
+                e.printStackTrace();
             }
         }
     }

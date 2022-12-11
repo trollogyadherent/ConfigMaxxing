@@ -2,7 +2,7 @@
 ![logo](logo_small.png)
 
 ### What is this?
-It is a library mod adding "graphical wrappers" for Forge config value selectors. For now there is a potion and mob picker available. The usage is pretty simple to figure out by looking inside the mod's code. Its also pretty easy to implement your own pickers, the examples are pretty self-explanatory. Pull requests with pickers are welcome.
+It is a library mod adding "graphical wrappers" for Forge config value selectors. For now there is a potion and mob picker available. The usage is pretty simple to figure out by looking inside the mod's code. Its also pretty easy to implement your own pickers, the examples are pretty self-explanatory. Pull requests with pickers are welcome. To be honest, the Forge config system is really impressive, but a PITA to expand. Something more open and based on JSON/TOML would be great.
 ![](Screenshots/01.png)
 
 ### Will you port it to [insert abandonware/meme version]?
