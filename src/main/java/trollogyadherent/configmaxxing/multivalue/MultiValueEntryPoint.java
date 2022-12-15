@@ -230,7 +230,7 @@ public class MultiValueEntryPoint extends GuiConfigEntries.StringEntry {
             return;
         }
 
-        System.out.println(guiConfigEntries);
+        //System.out.println(guiConfigEntries);
 
         //this.configEntries.get(0)
 

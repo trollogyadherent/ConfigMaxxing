@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.entity.player.EntityPlayer;
 import trollogyadherent.configmaxxing.util.BiomeUtil;
 import trollogyadherent.configmaxxing.util.BlockUtil;
+import trollogyadherent.configmaxxing.util.DimensionUtil;
 import trollogyadherent.configmaxxing.util.Util;
 
 public class CommonProxy {
@@ -29,7 +30,7 @@ public class CommonProxy {
 
     // postInit "Handle interaction with other mods, complete your setup based on this."
     public void postInit(FMLPostInitializationEvent event) {
-        
+
     }
 
     public void serverAboutToStart(FMLServerAboutToStartEvent event) {

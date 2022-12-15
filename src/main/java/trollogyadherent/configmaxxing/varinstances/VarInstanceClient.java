@@ -2,9 +2,13 @@ package trollogyadherent.configmaxxing.varinstances;
 
 import cpw.mods.fml.client.config.GuiEditArrayEntries;
 import cpw.mods.fml.relauncher.ReflectionHelper;
+import net.minecraft.world.WorldProvider;
+import net.minecraftforge.common.DimensionManager;
+import trollogyadherent.configmaxxing.ConfigMaxxing;
 import trollogyadherent.configmaxxing.configpickers.mob.MobRenderTicker;
 
 import java.lang.reflect.Field;
+import java.util.Hashtable;
 
 public class VarInstanceClient {
     public Field entryListField = ReflectionHelper.findField(cpw.mods.fml.client.config.GuiEditArray.class, "entryList");
@@ -18,6 +22,10 @@ public class VarInstanceClient {
     public Field btnUndoChangesField = ReflectionHelper.findField(cpw.mods.fml.client.config.GuiEditArray.class, "btnUndoChanges");
     public Field chkApplyGloballyField = ReflectionHelper.findField(cpw.mods.fml.client.config.GuiConfig.class, "chkApplyGlobally");
 
+    public Field providersField = ReflectionHelper.findField(DimensionManager.class, "providers");
+    public Hashtable<Integer, Class<? extends WorldProvider>> providers;
+
+
     public MobRenderTicker mobRenderTicker;
 
     public VarInstanceClient() {
@@ -30,5 +38,17 @@ public class VarInstanceClient {
         btnUndoChangesField.setAccessible(true);
         enabledField.setAccessible(true);
         chkApplyGloballyField.setAccessible(true);
+        providersField.setAccessible(true);
+    }
+
+    public void postInitHook() {
+        this.mobRenderTicker = new MobRenderTicker();
+        this.mobRenderTicker.register();
+        try {
+            providers = (Hashtable<Integer, Class<? extends WorldProvider>>) providersField.get(null);
+        } catch (IllegalAccessException e) {
+            ConfigMaxxing.error("Reflection failed");
+            e.printStackTrace();
+        }
     }
 }

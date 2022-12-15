@@ -4,6 +4,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import trollogyadherent.configmaxxing.configpickers.biome.BiomeEntryPoint;
 import trollogyadherent.configmaxxing.configpickers.block.BlockEntryPoint;
+import trollogyadherent.configmaxxing.configpickers.dimension.DimensionEntryPoint;
 import trollogyadherent.configmaxxing.configpickers.mob.MobBlacklistEntryPoint;
 import trollogyadherent.configmaxxing.configpickers.mob.MobEntryPoint;
 import trollogyadherent.configmaxxing.configpickers.potion.PotionEntryPoint;
@@ -44,6 +45,7 @@ public class Config {
 
         public static final String[] biomeArray = {};
         public static final String[] blockArray = {};
+        public static final String[] dimensionArray = {};
     }
 
     public static class Categories {
@@ -67,6 +69,7 @@ public class Config {
 
     public static String[] biomeArray = Defaults.biomeArray;
     public static String[] blockArray = Defaults.blockArray;
+    public static String[] dimensionArray = Defaults.dimensionArray;
 
     public static boolean debug;
 
@@ -177,6 +180,12 @@ public class Config {
             blockArrayProperty.setConfigEntryClass(BlockEntryPoint.class);
         }
         blockArray = blockArrayProperty.getStringList();
+
+        Property dimensionArrayProperty = config.get(Categories.examples, "dimensionArray", Defaults.dimensionArray, "Example list of dimensions.");
+        if (!Util.isServer()) {
+            dimensionArrayProperty.setConfigEntryClass(DimensionEntryPoint.class);
+        }
+        dimensionArray = dimensionArrayProperty.getStringList();
 
         Property singlePotionSlimProperty = config.get(Categories.examples, "slimExample for skill issue", Defaults.singlePotion, "This is to demonstrate slimmer selection list entries. For the MEGA modpack people. Houston, if you want smaller entries, just make them yourself");
         if (!Util.isServer()) {
